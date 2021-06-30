@@ -5,6 +5,7 @@
  */
 package codility;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -34,6 +35,55 @@ public class OddOccurrencesInArray {
         return A[A.length-1];
     }
     
+    public static int solution2(int[] A) {
+        // write your code in Java SE 8
+        Arrays.sort(A);
+        int i = 0;
+        int j;
+        while (i < A.length) {
+
+//        System.out.println("i "+i+" A[i] "+A[i]);
+            j = i + 1;
+            while (j < A.length) {
+
+//        System.out.println("j "+j+"A[j] "+A[j]);
+                if (A[i] != A[j]) {
+                    if (j == i + 1) {
+                        return A[i];
+                    } else {
+                        i = j - 1;
+                        break;
+                    }
+                } else {
+                    j++;
+                }
+            }
+
+            i++;
+        }
+        return A[A.length - 1];
+    }
+    
+    public static int solution3(int[] A) {
+        // write your code in Java SE 8
+        Arrays.sort(A);
+        int n=A.length;
+        if(n==1){
+            return A[0];
+        }
+        
+        int i = 0;
+        int count=1;
+        while(i<n){
+            count=1;
+            while (i+count < n && A[i]==A[i+count]) {
+            count ++;
+        }
+            if(count==1) return A[i];
+            i+=count;
+        }
+        return A[A.length-1];
+    }
     
 
     /**
@@ -41,10 +91,10 @@ public class OddOccurrencesInArray {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int a[] = {1, 1, 2}; 
+        int a[] = {9,1,2,2,1,8,8}; 
 //        a[0]=1;
 //        System.out.println("sol 1 "+solution(a));
-        System.out.println("sol " + solution(a));
+        System.out.println("sol " + solution3(a));
     }
 
 }
